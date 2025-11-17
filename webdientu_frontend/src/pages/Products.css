@@ -1,0 +1,97 @@
+.products-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 60px 0;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 0;
+}
+
+.filters-sidebar {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 20px;
+}
+
+.filter-title {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #333;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 10px;
+}
+
+.filter-group {
+  margin-bottom: 1.5rem;
+}
+
+.filter-group label {
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.form-select {
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.form-select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.pagination {
+  gap: 5px;
+}
+
+.page-item .page-link {
+  border-radius: 8px;
+  border: none;
+  color: #667eea;
+  font-weight: 600;
+  padding: 10px 15px;
+  transition: all 0.3s;
+}
+
+.page-item .page-link:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.page-item.active .page-link {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+}
+
+.page-item.disabled .page-link {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 991px) {
+  .filters-sidebar {
+    position: relative;
+    top: 0;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+}
+

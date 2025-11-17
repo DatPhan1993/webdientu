@@ -19,8 +19,25 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `ecommerce_backend_db`
+-- Tạo cơ sở dữ liệu nếu chưa tồn tại
 --
+
+CREATE DATABASE IF NOT EXISTS `webdientu` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `webdientu`;
+
+-- --------------------------------------------------------
+
+--
+-- Xóa các bảng cũ nếu tồn tại (theo thứ tự ngược với foreign key)
+--
+
+DROP TABLE IF EXISTS `shop_cart`;
+DROP TABLE IF EXISTS `love_product`;
+DROP TABLE IF EXISTS `product_options`;
+DROP TABLE IF EXISTS `products`;
+DROP TABLE IF EXISTS `categories`;
+DROP TABLE IF EXISTS `brands`;
+DROP TABLE IF EXISTS `account`;
 
 -- --------------------------------------------------------
 

@@ -1,0 +1,48 @@
+.footer {
+  margin-top: auto;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer h5 {
+  color: #fff;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer h5::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.footer a {
+  transition: all 0.3s;
+}
+
+.footer a:hover {
+  color: #667eea !important;
+  padding-left: 5px;
+}
+
+.social-icons a {
+  display: inline-block;
+  transition: all 0.3s;
+}
+
+.social-icons a:hover {
+  transform: translateY(-5px);
+  color: #667eea !important;
+}
+
+.footer ul li {
+  transition: all 0.3s;
+}
+
+.footer ul li:hover {
+  padding-left: 10px;
+}
+

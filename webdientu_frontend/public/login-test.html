@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Login - Đơn Giản</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        .success {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+        }
+        .info {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Test Login</h1>
+        
+        <div class="info">
+            <strong>📝 Thông tin đăng nhập:</strong><br>
+            Username: <code>admin</code><br>
+            Password: <code>admin123</code>
+        </div>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    value="admin" 
+                    required
+                    autocomplete="off"
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    value="admin123" 
+                    required
+                    autocomplete="off"
+                >
+            </div>
+            
+            <button type="submit" id="loginBtn">
+                🚀 ĐĂNG NHẬP
+            </button>
+        </form>
+        
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const resultDiv = document.getElementById('result');
+        const loginBtn = document.getElementById('loginBtn');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            loginBtn.disabled = true;
+            loginBtn.textContent = '⏳ Đang đăng nhập...';
+            
+            resultDiv.style.display = 'none';
+            
+            try {
+                const response = await fetch('http://localhost:8080/api/v1/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.text();
+                
+                if (response.ok) {
+                    // Parse response: id/role/username/token
+                    const [id, role, user, token] = data.split('/');
+                    
+                    resultDiv.className = 'result success';
+                    resultDiv.style.display = 'block';
+                    resultDiv.innerHTML = `
+                        <h3>✅ ĐĂNG NHẬP THÀNH CÔNG!</h3>
+                        <p><strong>ID:</strong> ${id}</p>
+                        <p><strong>Role:</strong> ${role}</p>
+                        <p><strong>Username:</strong> ${user}</p>
+                        <p><strong>Token (HS512):</strong></p>
+                        <pre>${token.substring(0, 100)}...</pre>
+                        <p style="margin-top: 15px; color: #28a745; font-weight: bold;">
+                            🎉 Backend hoạt động HOÀN HẢO!
+                        </p>
+                    `;
+                    
+                    // Save token to localStorage
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('user', JSON.stringify({ id, role, username: user }));
+                    
+                    // Auto redirect sau 3 giây
+                    setTimeout(() => {
+                        window.location.href = 'http://localhost:5173';
+                    }, 3000);
+                    
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.style.display = 'block';
+                    resultDiv.innerHTML = `
+                        <h3>❌ ĐĂNG NHẬP THẤT BẠI</h3>
+                        <p><strong>Status:</strong> ${response.status}</p>
+                        <p><strong>Response:</strong></p>
+                        <pre>${data}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `
+                    <h3>❌ LỖI KẾT NỐI</h3>
+                    <p>${error.message}</p>
+                    <p><strong>Chi tiết:</strong></p>
+                    <pre>${error.toString()}</pre>
+                `;
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = '🚀 ĐĂNG NHẬP';
+            }
+        });
+    </script>
+</body>
+</html>
+

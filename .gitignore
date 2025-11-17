@@ -1,0 +1,71 @@
+# E-Commerce Website - .gitignore
+
+## Java & Maven
+*.class
+*.jar
+*.war
+*.ear
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+## Spring Boot
+*.log
+*.gz
+spring.log
+application-local.properties
+
+## IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.classpath
+.project
+.settings/
+*.swp
+*.swo
+*~
+.DS_Store
+
+## Node & Frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dist/
+build/
+.next/
+.nuxt/
+.cache/
+
+## Database
+*.sql.backup
+*.sql~
+
+## Sensitive Information (IMPORTANT!)
+# DO NOT commit these files
+application-production.properties
+application-staging.properties
+*.key
+*.pem
+*.p12
+*.jks
+
+## Logs & Temp Files
+logs/
+*.log
+temp/
+tmp/
+*.tmp
+
+## OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+## Backup files
+*.bak
+*~
+

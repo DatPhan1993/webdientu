@@ -1,0 +1,138 @@
+.cart-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 60px 0;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.empty-cart {
+  padding: 100px 0;
+}
+
+.cart-item {
+  border: none;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 15px;
+  transition: all 0.3s;
+}
+
+.cart-item:hover {
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+.cart-item-image {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.cart-item-title {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.cart-item-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #dc3545;
+}
+
+.cart-item-total {
+  font-size: 1.3rem;
+  color: #667eea;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-input-cart {
+  width: 60px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.cart-summary {
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  border: none;
+  top: 20px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.total-row {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.total-price {
+  color: #dc3545;
+}
+
+.checkout-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  padding: 15px;
+  font-weight: 700;
+  border-radius: 50px;
+  transition: all 0.3s;
+}
+
+.checkout-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+/* Checkout Modal Styles */
+.modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.modal-header .btn-close {
+  filter: brightness(0) invert(1);
+}
+
+.form-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* Success Modal Animation */
+@keyframes scaleIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-body .text-success {
+  animation: scaleIn 0.5s ease-out;
+}
+
