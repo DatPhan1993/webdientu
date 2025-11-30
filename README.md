@@ -16,11 +16,19 @@ Dự án website thương mại điện tử được xây dựng với Spring B
 
 ## 🔧 Yêu cầu hệ thống
 
+### Backend
 - **Java**: JDK 11 trở lên
-- **Node.js**: v16 trở lên
 - **MySQL**: 8.0 trở lên
 - **Maven**: 3.6+ (hoặc sử dụng Maven Wrapper có sẵn)
-- **npm** hoặc **yarn**
+
+### Frontend
+- **Node.js**: **v18.0.0 trở lên** (khuyến nghị: v18.x hoặc v20.x LTS)
+- **npm**: **v9.0.0 trở lên** (hoặc **yarn** v1.22+)
+
+> **Lưu ý:** 
+> - React 19 và Vite 4.5.0 yêu cầu Node.js >= 18.0.0
+> - Kiểm tra phiên bản: `node --version` và `npm --version`
+> - Nếu sử dụng nvm, file `.nvmrc` đã được cấu hình sẵn với Node.js 18.0.0
 
 ## 📁 Cấu trúc dự án
 
@@ -120,7 +128,21 @@ Backend sẽ chạy tại: **http://localhost:8080**
 
 ### 4. Chạy Frontend
 
-1. **Cài đặt dependencies:**
+1. **Kiểm tra phiên bản Node.js và npm:**
+   ```bash
+   node --version   # Cần >= 18.0.0
+   npm --version    # Cần >= 9.0.0
+   ```
+   
+   **Nếu chưa cài đặt hoặc phiên bản thấp:**
+   - Tải Node.js từ: https://nodejs.org/ (khuyến nghị: LTS version 18.x hoặc 20.x)
+   - Hoặc sử dụng nvm (Node Version Manager):
+     ```bash
+     # Nếu có file .nvmrc trong project
+     nvm use
+     ```
+
+2. **Cài đặt dependencies:**
 
    **Trên Windows (PowerShell hoặc Command Prompt):**
    ```powershell
@@ -201,13 +223,16 @@ Backend sẽ chạy tại: **http://localhost:8080**
 - **Maven** - Dependency management
 
 ### Frontend
-- **React 19** - UI Library
-- **Vite** - Build tool và dev server
-- **React Router** - Routing
-- **Axios** - HTTP client
-- **Bootstrap 5** - CSS Framework
-- **React Bootstrap** - Bootstrap components cho React
-- **React Icons** - Icon library
+- **Node.js**: v18.0.0+ (yêu cầu tối thiểu)
+- **npm**: v9.0.0+ hoặc **yarn**: v1.22+
+- **React 19.2.0** - UI Library
+- **Vite 4.5.0** - Build tool và dev server
+- **React Router DOM 7.9.6** - Routing
+- **Axios 1.13.2** - HTTP client
+- **Bootstrap 5.3.8** - CSS Framework
+- **React Bootstrap 2.10.10** - Bootstrap components cho React
+- **React Icons 5.5.0** - Icon library
+- **ESLint 9.39.1** - Code linting
 
 ## 📡 API Endpoints
 
@@ -268,6 +293,36 @@ Backend sẽ chạy tại: **http://localhost:8080**
 ### Lỗi port đã được sử dụng
 - Thay đổi port trong `application.properties`: `server.port=8081`
 - Hoặc dừng ứng dụng đang sử dụng port đó
+
+### Lỗi phiên bản Node.js không đúng
+
+**Vấn đề: Node.js version quá cũ hoặc không tương thích**
+
+**Giải pháp:**
+1. **Kiểm tra phiên bản hiện tại:**
+   ```bash
+   node --version
+   ```
+   Cần >= 18.0.0
+
+2. **Cài đặt Node.js mới:**
+   - Tải từ: https://nodejs.org/ (LTS version)
+   - Hoặc sử dụng nvm:
+     ```bash
+     # Windows (nvm-windows)
+     nvm install 18.0.0
+     nvm use 18.0.0
+     
+     # Linux/Mac
+     nvm install 18.0.0
+     nvm use 18.0.0
+     ```
+
+3. **Nếu sử dụng nvm và có file .nvmrc:**
+   ```bash
+   cd webdientu_frontend
+   nvm use  # Tự động sử dụng phiên bản trong .nvmrc
+   ```
 
 ### Lỗi npm install trên Windows
 
