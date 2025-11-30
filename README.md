@@ -121,8 +121,44 @@ Backend sẽ chạy tại: **http://localhost:8080**
 ### 4. Chạy Frontend
 
 1. **Cài đặt dependencies:**
+
+   **Trên Windows (PowerShell hoặc Command Prompt):**
+   ```powershell
+   cd webdientu_frontend
+   npm install
+   ```
+   
+   **Nếu gặp lỗi hoặc npm install không chạy đúng, thử các bước sau:**
+   
+   a. **Xóa node_modules và package-lock.json (nếu có):**
+   ```powershell
+   # Xóa thư mục node_modules
+   Remove-Item -Recurse -Force node_modules
+   
+   # Xóa file package-lock.json
+   Remove-Item -Force package-lock.json
+   ```
+   
+   b. **Xóa npm cache:**
+   ```powershell
+   npm cache clean --force
+   ```
+   
+   c. **Cài đặt lại:**
+   ```powershell
+   npm install
+   ```
+   
+   **Hoặc sử dụng npm ci (clean install):**
+   ```powershell
+   npm ci
+   ```
+   
+   **Trên Linux/Mac:**
    ```bash
    cd webdientu_frontend
+   rm -rf node_modules package-lock.json
+   npm cache clean --force
    npm install
    ```
    
@@ -233,9 +269,77 @@ Backend sẽ chạy tại: **http://localhost:8080**
 - Thay đổi port trong `application.properties`: `server.port=8081`
 - Hoặc dừng ứng dụng đang sử dụng port đó
 
-### Lỗi dependencies
-- Backend: `mvn clean install` để tải lại dependencies
-- Frontend: Xóa `node_modules` và `package-lock.json`, sau đó chạy lại `npm install`
+### Lỗi npm install trên Windows
+
+**Vấn đề: `npm install` không chạy hoặc chỉ chạy script đầu tiên**
+
+**Giải pháp:**
+
+1. **Xóa node_modules và package-lock.json:**
+   ```powershell
+   # PowerShell
+   Remove-Item -Recurse -Force node_modules
+   Remove-Item -Force package-lock.json
+   ```
+   
+   ```cmd
+   REM Command Prompt
+   rmdir /s /q node_modules
+   del package-lock.json
+   ```
+
+2. **Xóa npm cache:**
+   ```powershell
+   npm cache clean --force
+   ```
+
+3. **Kiểm tra phiên bản Node.js và npm:**
+   ```powershell
+   node --version
+   npm --version
+   ```
+   Đảm bảo Node.js >= 16 và npm >= 7
+
+4. **Cài đặt lại với quyền Administrator (nếu cần):**
+   - Mở PowerShell/CMD với quyền Administrator
+   - Chạy lại `npm install`
+
+5. **Sử dụng npm ci thay vì npm install:**
+   ```powershell
+   npm ci
+   ```
+   Lệnh này sẽ cài đặt chính xác theo package-lock.json
+
+6. **Nếu vẫn lỗi, thử cài đặt từng package:**
+   ```powershell
+   npm install --legacy-peer-deps
+   ```
+
+### Lỗi dependencies Backend
+- Chạy `mvn clean install` để tải lại dependencies
+- Kiểm tra kết nối internet để tải dependencies từ Maven Central
+
+### Lỗi dependencies Frontend (Linux/Mac)
+- Xóa `node_modules` và `package-lock.json`:
+  ```bash
+  rm -rf node_modules package-lock.json
+  ```
+- Xóa npm cache:
+  ```bash
+  npm cache clean --force
+  ```
+- Cài đặt lại:
+  ```bash
+  npm install
+  ```
+
+### Lỗi quyền truy cập (Permission denied)
+- **Windows:** Chạy terminal với quyền Administrator
+- **Linux/Mac:** Sử dụng `sudo` (không khuyến nghị) hoặc cấu hình npm để không cần sudo:
+  ```bash
+  mkdir ~/.npm-global
+  npm config set prefix '~/.npm-global'
+  ```
 
 ## 👥 Đóng góp
 
