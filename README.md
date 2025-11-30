@@ -22,13 +22,15 @@ Dự án website thương mại điện tử được xây dựng với Spring B
 - **Maven**: 3.6+ (hoặc sử dụng Maven Wrapper có sẵn)
 
 ### Frontend
-- **Node.js**: **v18.0.0 trở lên** (khuyến nghị: v18.x hoặc v20.x LTS)
+- **Node.js**: **v20.0.0 trở lên** (khuyến nghị: v20.x LTS)
 - **npm**: **v9.0.0 trở lên** (hoặc **yarn** v1.22+)
 
-> **Lưu ý:** 
-> - React 19 và Vite 4.5.0 yêu cầu Node.js >= 18.0.0
+> **⚠️ Lưu ý quan trọng:** 
+> - **React Router DOM 7.9.6** yêu cầu Node.js >= 20.0.0
+> - **ESLint 9.39.1** yêu cầu Node.js `^18.18.0 || ^20.9.0 || >=21.1.0` (không hỗ trợ v19)
+> - **Node.js v19.x KHÔNG được hỗ trợ** - vui lòng sử dụng v20.x LTS hoặc v18.18.0+
 > - Kiểm tra phiên bản: `node --version` và `npm --version`
-> - Nếu sử dụng nvm, file `.nvmrc` đã được cấu hình sẵn với Node.js 18.0.0
+> - Nếu sử dụng nvm, file `.nvmrc` đã được cấu hình sẵn với Node.js 20.0.0
 
 ## 📁 Cấu trúc dự án
 
@@ -130,15 +132,25 @@ Backend sẽ chạy tại: **http://localhost:8080**
 
 1. **Kiểm tra phiên bản Node.js và npm:**
    ```bash
-   node --version   # Cần >= 18.0.0
+   node --version   # Cần >= 20.0.0 (hoặc >= 18.18.0)
    npm --version    # Cần >= 9.0.0
    ```
    
+   **⚠️ Lưu ý:** 
+   - Node.js v19.x KHÔNG được hỗ trợ do yêu cầu của React Router DOM và ESLint
+   - Khuyến nghị sử dụng Node.js v20.x LTS (ổn định nhất)
+   - Node.js > 20 có thể gặp một số vấn đề tương thích
+   
    **Nếu chưa cài đặt hoặc phiên bản thấp:**
-   - Tải Node.js từ: https://nodejs.org/ (khuyến nghị: LTS version 18.x hoặc 20.x)
+   - Tải Node.js từ: https://nodejs.org/ (khuyến nghị: **LTS version 20.x**)
    - Hoặc sử dụng nvm (Node Version Manager):
      ```bash
-     # Nếu có file .nvmrc trong project
+     # Cài đặt Node.js 20 LTS
+     nvm install 20
+     nvm use 20
+     
+     # Hoặc nếu có file .nvmrc trong project
+     cd webdientu_frontend
      nvm use
      ```
 
@@ -223,7 +235,7 @@ Backend sẽ chạy tại: **http://localhost:8080**
 - **Maven** - Dependency management
 
 ### Frontend
-- **Node.js**: v18.0.0+ (yêu cầu tối thiểu)
+- **Node.js**: v20.0.0+ (yêu cầu tối thiểu, không hỗ trợ v19.x)
 - **npm**: v9.0.0+ hoặc **yarn**: v1.22+
 - **React 19.2.0** - UI Library
 - **Vite 4.5.0** - Build tool và dev server
@@ -296,32 +308,46 @@ Backend sẽ chạy tại: **http://localhost:8080**
 
 ### Lỗi phiên bản Node.js không đúng
 
-**Vấn đề: Node.js version quá cũ hoặc không tương thích**
+**Vấn đề: Node.js version quá cũ, quá mới, hoặc không tương thích**
+
+**Các lỗi thường gặp:**
+- `npm WARN EBADENGINE Unsupported engine` - Phiên bản Node.js không được hỗ trợ
+- Node.js v19.x không được hỗ trợ bởi React Router DOM 7.9.6 và ESLint 9.39.1
 
 **Giải pháp:**
 1. **Kiểm tra phiên bản hiện tại:**
    ```bash
    node --version
    ```
-   Cần >= 18.0.0
+   **Yêu cầu:** >= 20.0.0 (hoặc >= 18.18.0)
+   **Không hỗ trợ:** v19.x
+   **Khuyến nghị:** v20.x LTS (ổn định nhất, tránh dùng version > 20)
 
-2. **Cài đặt Node.js mới:**
-   - Tải từ: https://nodejs.org/ (LTS version)
+2. **Cài đặt Node.js đúng phiên bản:**
+   - Tải từ: https://nodejs.org/ (khuyến nghị: **LTS version 20.x**)
    - Hoặc sử dụng nvm:
      ```bash
      # Windows (nvm-windows)
-     nvm install 18.0.0
-     nvm use 18.0.0
+     nvm install 20
+     nvm use 20
      
      # Linux/Mac
-     nvm install 18.0.0
-     nvm use 18.0.0
+     nvm install 20
+     nvm use 20
      ```
 
-3. **Nếu sử dụng nvm và có file .nvmrc:**
+3. **Nếu đang dùng Node.js v19.x:**
+   ```bash
+   # Gỡ cài đặt v19 và cài v20
+   nvm uninstall 19.9.0
+   nvm install 20
+   nvm use 20
+   ```
+
+4. **Nếu sử dụng nvm và có file .nvmrc:**
    ```bash
    cd webdientu_frontend
-   nvm use  # Tự động sử dụng phiên bản trong .nvmrc
+   nvm use  # Tự động sử dụng Node.js 20.0.0 từ file .nvmrc
    ```
 
 ### Lỗi npm install trên Windows
